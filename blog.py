@@ -4,8 +4,12 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    numbers = [1,2,3,4,5]
-    return render_template("index.html",numbers = numbers)
+    articles = [
+        {"id":1,"title":"Deneme1","content":"Deneme1 içerik"},
+        {"id":2,"title":"Deneme2","content":"Deneme2 içerik"},
+        {"id":3,"title":"Deneme3","content":"Deneme3 içerik"}
+    ]
+    return render_template("index.html", articles = articles)
 
 
 @app.route("/about")

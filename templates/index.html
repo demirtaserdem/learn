@@ -8,11 +8,16 @@
 
 </div>
 
+
+
+
 <ul>
-    {% for number in numbers  %}
+    {% for article in articles %}
     <li>
-        {{ number }}
+        id: {{article.id}} - title: {{article.title}} - content: {{article.content}}
     </li>
     {% endfor %}
+    
 </ul>
 
+{% endblock body %}
