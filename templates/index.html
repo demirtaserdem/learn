@@ -8,12 +8,11 @@
 
 </div>
 
-{% if islem == 1 %}
-<p>1. işlem</p>
-{% elif islem == 2 %}
-<p>2. işlem</p>
-{% else %}
-<p>Geçersiz İşlem</p>
-{% endif %}
+<ul>
+    {% for number in numbers  %}
+    <li>
+        {{ number }}
+    </li>
+    {% endfor %}
+</ul>
 
-{% endblock  %}
