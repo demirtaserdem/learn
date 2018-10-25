@@ -7,10 +7,15 @@
     <title>Ana Sayfa</title>
 </head>
 <body>
-    <h3>Anasayfa</h3>
-    <p>Burası anasayfadır.</p>
-    <h5>Sayı</h5>
-    <p>{{ number }}</p>
-    <p>{{ number2 }}</p>
+    <p>{{ article["title"] }}</p>
+    <p>{{ article["body"] }}</p>
+    <p>{{ article["autor"] }}</p>   
+    <!-- ilk üçü bu şekide yapılabilir-->
+    <!--aşağıdaki gibi de yapılablir noktalı-->
+    <p>___________________________</p>
+    <p>{{ article.title }}</p>
+    <p>{{ article.body }}</p>
+    <p>{{ article.autor }}</p> 
+
 </body>
 </html>
