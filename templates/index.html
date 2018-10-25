@@ -8,10 +8,12 @@
 
 </div>
 
-{% if answer == "evet" %}
-<p>Cevabımız Evet</p>
+{% if islem == 1 %}
+<p>1. işlem</p>
+{% elif islem == 2 %}
+<p>2. işlem</p>
 {% else %}
-<p>Cevabımız Evet değil...</p>
+<p>Geçersiz İşlem</p>
 {% endif %}
 
 {% endblock  %}
