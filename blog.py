@@ -16,6 +16,9 @@ def index():
 def about():
     return render_template("about.html")
 
+@app.route("/article/<string:id>")
+def detail(id):
+    return "Atrical id:" + id
 
 if __name__ == "__main__":
     app.run(debug = True)
