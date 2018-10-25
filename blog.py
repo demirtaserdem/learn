@@ -1,18 +1,12 @@
-from flask import Flask
+from flask import Flask,render_template
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return "Anasayfa"
-
-@app.route("/about")
-def about():
-    return "Hakkında"
-
-@app.route("/about/erdem")
-def erdem():
-    return "Erdem Hakkında"
+    sayi = 10
+    sayi2 = 20
+    return render_template("index.html",number = sayi,number2 = sayi2)
 
 if __name__ == "__main__":
     app.run(debug = True)
