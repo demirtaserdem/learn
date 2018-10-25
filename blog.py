@@ -3,6 +3,16 @@ from flask_mysqldb import MySQL
 from wtforms import Form,StringField,TextAreaField,PasswordField,validators
 from passlib.hash import sha256_crypt
 
+#Kullanıcı kayıt Formu
+class RegisterForm(Form):
+    name = StringField("İsim Soyisim",validators = [validators.Length(min = 4,max = 25)])
+    username = StringField("Kullanıcı Adı",validators = [validators.Length(min = 5,max = 35)])
+    email = StringField("İsim Soyisim",validators = [validators.Email(message = "Lütfen Geçerli Bir Mail Adresi Giriniz...")])
+    password = PasswordField("Parola: ",validators=[
+        validators.data_required(message="Lütfen bir parola belirleyin"),
+        validators.EqualTo(fieldname = "confirm",message="Parolanız uyuşmuyor...")
+    ])
+    confirm = PasswordField("Parolayı Doğrula...")
 
 app = Flask(__name__)
 app.config["MYSQL_HOST"] = "localhost"
