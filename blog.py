@@ -70,6 +70,32 @@ def register():
 @app.route("/login",methods = ["GET","POST"])
 def login():
     form = LoginForm(request.form)
+
+    if request.method == "POST":
+        username = form.username.data
+        password_entired = form.password.data
+        cursor = mysql.connection.cursor()
+        sorgu = "select * from users where username = %s"
+
+        result = cursor.execute(sorgu,(username,))
+
+        if result > 0 :
+            data = cursor.fetchone()
+            real_password = data["password"]
+            if sha256_crypt.verify(password_entired,real_password):
+                flash("Başarıyla Giriş Yaptınız","success")
+                return redirect(url_for("index"))
+            else:
+                flash("Parolanızı Yanlış Girdiniz....","danger")
+                return redirect(url_for("login"))
+
+
+        else:
+            flash("böyle bir kullanıcı bulunmuyor","danger")
+            return redirect(url_for("login"))
+
+
+
     return render_template("login.html",form = form)
 
 
