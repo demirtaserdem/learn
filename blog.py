@@ -14,6 +14,10 @@ class RegisterForm(Form):
     ])
     confirm = PasswordField("Parolayı Doğrula...")
 
+class LoginForm(Form):
+    username = StringField("Kullanıcı Adı: ")
+    password = PasswordField("Parola")
+
 
 app = Flask(__name__)
 app.secret_key = "edblog"
@@ -57,11 +61,18 @@ def register():
         cursor.close()
 
         
-
-        return redirect(url_for("index"))
         flash("Başarıyla kayıt oldunuz...","success")
+        return redirect(url_for("login"))
     else:
         return render_template("register.html",form = form)
+
+#login İşlemi
+@app.route("/login",methods = ["GET","POST"])
+def login():
+    form = LoginForm(request.form)
+    return render_template("login.html",form = form)
+
+
 
 if __name__ == "__main__":
     app.run(debug = True)
