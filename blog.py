@@ -7,12 +7,13 @@ from passlib.hash import sha256_crypt
 class RegisterForm(Form):
     name = StringField("İsim Soyisim",validators = [validators.Length(min = 4,max = 25)])
     username = StringField("Kullanıcı Adı",validators = [validators.Length(min = 5,max = 35)])
-    email = StringField("İsim Soyisim",validators = [validators.Email(message = "Lütfen Geçerli Bir Mail Adresi Giriniz...")])
-    password = PasswordField("Parola: ",validators=[
-        validators.data_required(message="Lütfen bir parola belirleyin"),
-        validators.EqualTo(fieldname = "confirm",message="Parolanız uyuşmuyor...")
+    email = StringField("Email: ",validators = [validators.Email(message = "Lütfen Geçerli Bir Mail Adresi Giriniz...")])
+    password = PasswordField("Parola: ",validators = [
+        validators.DataRequired(message = "Lütfen bir parola belirleyin"),
+        validators.EqualTo(fieldname = "confirm",message = "Parolanız uyuşmuyor...")
     ])
     confirm = PasswordField("Parolayı Doğrula...")
+
 
 app = Flask(__name__)
 app.config["MYSQL_HOST"] = "localhost"
@@ -26,12 +27,7 @@ mysql = MySQL(app)
 
 @app.route("/")
 def index():
-    articles = [
-        {"id":1,"title":"Deneme1","content":"Deneme1 içerik"},
-        {"id":2,"title":"Deneme2","content":"Deneme2 içerik"},
-        {"id":3,"title":"Deneme3","content":"Deneme3 içerik"}
-    ]
-    return render_template("index.html", articles = articles)
+    return render_template("index.html")
 
 
 @app.route("/about")
@@ -41,6 +37,16 @@ def about():
 @app.route("/article/<string:id>")
 def detail(id):
     return "Atrical id:" + id
+
+#Kayıt olma
+@app.route("/register",methods =["GET","POST"])
+def register():
+    form = RegisterForm(request.form)
+    
+    if request.method == "POST":
+        return redirect(url_for("index"))
+    else:
+        return render_template("register.html",form = form)
 
 if __name__ == "__main__":
     app.run(debug = True)
