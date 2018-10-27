@@ -39,6 +39,10 @@ def index():
 def about():
     return render_template("about.html")
 
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
+
 @app.route("/article/<string:id>")
 def detail(id):
     return "Atrical id:" + id
