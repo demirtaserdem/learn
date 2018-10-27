@@ -133,13 +133,24 @@ def logout():
 @login_required
 def addarticle():
     form = ArticleForm(request.form)
+    if (request.method == "POST" and form.validate()):
+        title = form.title.data
+        content = form.content.data
 
+        cursor = mysql.connection.cursor()
+
+        sorgu = "insert into articles(title,author,content) values(%s,%s,%s)"
+        cursor.execute(sorgu,(title,session["username"],content))
+        mysql.connection.commit()
+        cursor.close()
+        flash("Makale başarıyla eklendi","success")
+        return redirect(url_for("dashboard"))
 
     return render_template("addarticle.html",form = form)
 
 #Makale Form
 class ArticleForm(Form):
-    title = StringField("Makale Başlığı: ",validators = [validators.Length("min = 5")])
-    content = TextAreaField("Makale İçeriği",validators=[validators.Length("min = 10")])
+    title = StringField("Makale Başlığı: ",validators = [validators.Length(min = 5)])
+    content = TextAreaField("Makale İçeriği",validators=[validators.Length(min = 10)])
 if __name__ == "__main__":
     app.run(debug = True)
