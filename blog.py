@@ -194,7 +194,35 @@ def delete(id):
         flash("Böyle bir makale yok veya bu işleme yetkiniz yok","danger")
         return redirect(url_for("index"))
 
+#Makale DÜzenleme
+@app.route("/edit/<string:id>", methods = ["GET","POST"])
+@login_required
+def update(id):
+    if request.method == "GET":
+        cursor = mysql.connect.cursor()
+        sorgu = "select * from articles where id = %s and author = %s"
+        result = cursor.execute(sorgu,(id,session["username"]))
+        if result == 0:
+            flash("Böyle bir makale yok veya böyle bir işleme yetkiniz yok","danger")
+            return redirect(url_for("index"))
+        else:
+            article = cursor.fetchone()
+            form = ArticleForm()
+            form.title.data = article["title"]
+            form.content.data = article["content"]
+            return render_template("update.html",form = form)
+    else:
+        form = ArticleForm(request.form)
+        newTitle = form.title.data
+        newContent = form.content.data
 
+        sorgu2 = "update articles set title = %s, content = %s where id = %s"
+        cursor = mysql.connection.cursor()
+        cursor.execute(sorgu2,(newTitle,newContent,id))
+        mysql.connection.commit()
+
+        flash("Makale Başarıyla güncellendi")
+        return redirect(url_for("dashboard"))
 
 #Makale Form
 class ArticleForm(Form):
