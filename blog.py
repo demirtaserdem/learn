@@ -82,7 +82,15 @@ def dashboard():
 
 @app.route("/article/<string:id>")
 def detail(id):
-    return "Atrical id:" + id
+    cursor = mysql.connection.cursor()
+    sorgu = "select * from articles where id = %s"
+    result = cursor.execute(sorgu,(id,))
+    if result > 0:
+        article = cursor.fetchone()
+        return render_template("article.html",article = article)
+    else:
+        return render_template("article.html")
+#    return "Atrical id:" + id
 
 #Kayıt olma
 @app.route("/register",methods =["GET","POST"])
@@ -141,6 +149,7 @@ def login():
 
 
     return render_template("login.html",form = form)
+#Detay sayfası
 
 #Logout işlemi
 @app.route("/logout")
