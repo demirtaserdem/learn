@@ -54,6 +54,20 @@ def index():
 def about():
     return render_template("about.html")
 
+#Makale Sayfası
+@app.route("/articles")
+def articles():
+    cursor = mysql.connection.cursor()
+    sorgu = "select * from articles"
+    result = cursor.execute(sorgu)
+    if result >0:
+        articles =  cursor.fetchall()
+        return render_template("articles.html", articles = articles)
+    else:
+        return render_template("articles.html")
+        
+    
+
 @app.route("/dashboard")
 @login_required
 def dashboard():
