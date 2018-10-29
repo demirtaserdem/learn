@@ -10,6 +10,21 @@ def index():
     todos = Todo.query.all()
     return render_template("index.html",todos = todos)
 
+@app.route("/comlete/<string:id>")
+def completeTodo(id):
+    todo = Todo.query.filter_by(id = id).first()
+    """
+    if todo.comlete == True:
+        todo.comlete = False
+    else:
+        todo.comlete = True
+    """
+    todo.complete = not todo.complete
+    db.session.commit()
+    return redirect(url_for("index"))
+
+    
+
 @app.route("/add",methods = ["POST"])
 def addTodo():
     title = request.form.get("title")
