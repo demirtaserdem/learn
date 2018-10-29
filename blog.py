@@ -224,6 +224,25 @@ def update(id):
         flash("Makale Başarıyla güncellendi")
         return redirect(url_for("dashboard"))
 
+#Arama Url
+@app.route("/search",methods = ["GET","POST"])
+def search():
+    if request.method == "GET":
+        return redirect(url_for("index"))
+    else:
+        keyword = request.form.get("keyword")
+        cursor = mysql.connection.cursor()
+        sorgu = "select * from articles where title like '%" + keyword + "%'"
+        result = cursor.execute(sorgu)
+        if result == 0:
+            flash("Aranan kelimeye uygun makale bulunamadı","danger")
+            return redirect(url_for("articles"))    
+        
+        else:
+            articles = cursor.fetchall()
+            return render_template("articles.html",articles = articles)
+
+
 #Makale Form
 class ArticleForm(Form):
     title = StringField("Makale Başlığı: ",validators = [validators.Length(min = 5)])
