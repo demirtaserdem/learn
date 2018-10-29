@@ -1,9 +1,22 @@
-from flask import Flask
+from flask import Flask,render_template,redirect,url_for,request
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/HP/Desktop/edblog/learn/TodoApp/todo.db'
 db = SQLAlchemy(app)
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/add",methods = ["POST"])
+def addTodo():
+    title = request.form.get("title")
+    newTodo = Todo(title = title,complete = False)
+    db.session.add(newTodo)
+    db.session.commit()
+    return redirect(url_for("index"))
+
 
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
