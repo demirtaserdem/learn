@@ -177,6 +177,7 @@ def addarticle():
         return redirect(url_for("dashboard"))
 
     return render_template("addarticle.html",form = form)
+
 #Makale Silme
 @app.route("/delete/<string:id>")
 @login_required
