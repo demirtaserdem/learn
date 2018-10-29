@@ -18,9 +18,35 @@
                     <br>
                     <button type = "submit" class = "btn btn-danger">Ekle</button>
                     <hr>
-                    
+
                     </div>
-        </form> 
+        </form>
+        <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Todo Başlık</th>
+                    <th scope="col">Todo Durum</th>
+                    <th scope="col">Durum Güncelle</th>
+                    <th scope="col">Durum Sil</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for todo in todos %}
+                    <tr>
+                        <th scobe ="row"> {{todo.id}}</th>
+                        <td>{{todo.title}}</td>
+                        {% if todo.complete == False %}
+                        <td>Tamamlanmadı</td>
+                        {% else %}
+                        <td>Tamamlandı</td>
+                        {% endif %}
+                        <td><a href="/comlete/{{todo.id}}" class = "btn btn-danger">Tamamla</a></td>
+                        <td><a href="/delete/{{todo.id}}" class = "btn btn-danger">Sil</a></td>
+                        </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
 
     </div>
 
