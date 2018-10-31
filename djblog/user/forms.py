@@ -8,7 +8,7 @@ class RegisterForm(forms.Form):
     def clean(self):
         username = self.cleaned_data.get("username")
         password = self.cleaned_data.get("password")
-        confirm = self.cleaned_date.get("confirm")
+        confirm = self.cleaned_data.get("confirm")
         
         if password and confirm and password != confirm:
             raise forms.ValidationError("Parolalar Eşleşmiyor")
