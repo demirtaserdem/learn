@@ -8,5 +8,11 @@ def index(request):
      #return HttpResponse("Anasayfa")
      #return render(request,"index.html",{"number":"1"})
     return render(request,"index.html",context)
+
+
 def about(request):
     return render(request,"about.html")
+
+def detail(request,id):
+    return HttpResponse("Detail: "+str(id))
+
