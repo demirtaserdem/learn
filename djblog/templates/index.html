@@ -3,5 +3,24 @@
 <div class = "jumbotron text-center">
     <h3>Edbloğuna hoşgeldiniz</h3>
     <p>Bu blog öğrenme blogudur.</p>
+    
+    <!--
+    <p>{{number1}}</p>
+    <p>{{number2}}</p>
+    -->
+    <!--
+    {% if number1 == 20 %}
+        <p>Sayımız 20 dir.</p>
+    {% else %}
+        <p>Sayımız 20 ye eşit değil.</p>
+    {% endif %}     
+    -->
+    <ul>
+    {% for number in numbers %}
+        <li>
+            {{number}}
+        </li>
+    {% endfor %}
+    </ul>
 </div>
 {% endblock body %}
