@@ -3,7 +3,7 @@ from .forms import RegisterForm,LoginForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 
-from django.contrib.auth import login,authenticate
+from django.contrib.auth import login,authenticate,logout
 # Create your views here.
 
 def register(request):
@@ -46,4 +46,6 @@ def loginUser(request):
     return render(request,"login.html",context)
 
 def logoutUser(request):
-    pass
+    logout(request)
+    messages.success(request,"Başarıyla Çıkış Yaptınız")
+    return redirect("index")
