@@ -23,4 +23,11 @@
     {% endfor %}
     </ul>
 </div>
+<p>
+    {% if request.user.is_authenticated %}
+        Giriş Yapılmış, kullanıcı adı: {{request.user.username}}
+    {% else %}
+        Giriş Yapılmamış
+    {% endif %}
+</p>
 {% endblock body %}
