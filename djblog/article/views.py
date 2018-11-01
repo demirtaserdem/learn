@@ -1,5 +1,6 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,redirect
 from .forms import ArticleForm
+from django.contrib import messages
 # Create your views here.
 def index(request):
     context = {
@@ -17,8 +18,17 @@ def dashboard(request):
     return render(request,"dashboard.html")
 
 def addArticle(request):
-    form = ArticleForm()
-
+    form = ArticleForm(request.POST or None)
+    if form.is_valid():
+        article = form.save(commit = False)
+        article.author = request.user
+        article.save()
+        """
+        article objesi
+        article.save()
+        """
+        messages.success(request,"Makale Başarıyla Oluşturuldu")
+        return redirect("index")
     return render(request,"addarticle.html",{"form" : form})
 
 
