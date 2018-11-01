@@ -26,7 +26,7 @@
                
         <tr>
             <th scope="row">{{article.id}}</th>
-            <td>{{article.title}}</td>
+            <td><a href="/articles/article/{{article.id}}">{{article.title}}</a></td>
             <td>{{article.author.username}}</td>
             <td>{{article.created_date}}</td>
             <td><a class = "btn btn-danger" href="/articles/update/{{article.id}}">Güncelle</a></td>
