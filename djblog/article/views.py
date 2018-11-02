@@ -33,7 +33,7 @@ def addArticle(request):
         article.save()
         """
         messages.success(request,"Makale Başarıyla Oluşturuldu")
-        return redirect("index")
+        return redirect("article:dashboard")
     return render(request,"addarticle.html",{"form" : form})
 
 def detail(request,id):
@@ -48,7 +48,13 @@ def update(request,id):
         article = form.save(commit = False)
         article.author = request.user
         article.save()
-        messages.success(request,"Makale Başarıyla Oluşturuldu")
-        return redirect("index")
+        messages.success(request,"Makale Başarıyla Güncellendi")
+        return redirect("article:dashboard")
     return render(request,"update.html",{"form":form})
-    
+
+def deleteArticle(request,id):
+    article = get_object_or_404(Article,id = id)
+    article.delete()
+    messages.success(request,"Makale Başarıyla silindi")
+    return redirect("article:dashboard")
+
