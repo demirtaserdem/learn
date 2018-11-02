@@ -41,12 +41,9 @@
       <hr>
        
       <!-- Post Content -->
-      <p class="lead">{{article.content|safe}}</p>
-
-      
-
-      <hr>    
-
+      <p class="lead">{{article.content|safe|truncatewords:50}}</p>
+      <a style = "float : right;" href="/articles/article/{{article.id}}" class = "btn btn-danger">Devamını Oku</a>
+      <hr>
      
 
         </div>
