@@ -4,6 +4,11 @@ from django.contrib import messages
 from .models import Article
 from django.contrib.auth.decorators import login_required
 # Create your views here.
+
+def articles(request):
+    articles = Article.objects.all()
+    return render(request,"articles.html",{"articles":articles})
+
 def index(request):
     context = {
         "numbers" : [1,2,3,4,5,6]
