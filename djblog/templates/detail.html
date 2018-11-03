@@ -41,9 +41,30 @@
 
             </div>
           </div>
+          <div class="row">
 
+            <!-- Post Content Column -->
+            <div class="col-lg-8">
+                <div class="card my-4">
+                    <h5 class="card-header">Yorum Yap:</h5>
+                    <div class="card-body">
+                      <form method="post" action ="{% url 'article:comment' article.id %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">İsim:</label>
+                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="İsminizi Giriniz">
+                          </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Yorum:</label>
+                            <textarea class="form-control" rows="3"></textarea>
+                          </div>
+                        <button type="submit" class="btn btn-danger">Ekle</button>
+                      </form>
+                    </div>
+                  </div>
         
-          
+        </div>
+      </div>
 
          
 
