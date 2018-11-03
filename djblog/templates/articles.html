@@ -30,7 +30,7 @@
     <div class="col-lg-8">
 
       <!-- Title -->
-      <a href="/articles/article/{{article.id}}"> <h2 class="mt-4">{{article.title}}</h2></a>
+      <a href="{% url 'article:detail' article.id %}"> <h2 class="mt-4">{{article.title}}</h2></a>
 
       <!-- Author -->
       <p class="lead">
@@ -48,14 +48,14 @@
       {% if article.article_image %}
       
       
-      <a href="/articles/article/{{article.id}}"> <img class="img-fluid rounded" src="{{article.article_image.url}}" alt=""> </a>
+      <a href="{% url 'article:detail' article.id %}"> <img class="img-fluid rounded" src="{{article.article_image.url}}" alt=""> </a>
       {% else %}
       {% endif %}
       <hr>
        
       <!-- Post Content -->
       <p class="lead">{{article.content|safe|truncatewords:50}}</p>
-      <a style = "float : right;" href="/articles/article/{{article.id}}" class = "btn btn-danger">Devamını Oku</a>
+      <a style = "float : right;" href="{% url 'article:detail' article.id %}" class = "btn btn-danger">Devamını Oku</a>
       <hr>
      
 
